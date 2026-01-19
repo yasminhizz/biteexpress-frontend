@@ -1,0 +1,77 @@
+/* customerMenuCategory.css */
+
+
+.customer-categories-page {
+  display: flex;
+  justify-content: flex-start;   /* Center horizontally */
+  flex-direction: column; 
+  align-items: center;   /* align to top instead of middle */
+  height: 100%;         /* Full viewport height as needed */
+  min-height: 85.6vh;
+  width: 100%;               /* avoid forcing 100vw which can cause scroll issues */
+  padding: 0;
+  padding-top: 10px; 
+  padding-bottom:30px;        /* gap between header and login box */
+  background: url("../assets/bgc.png") no-repeat center center/cover; /* Background image */
+  background-size: cover;       /* make bg cover the screen */
+  overflow: hidden; 
+}
+
+.page-title {
+  font-size: 2.25rem;
+  margin-top: 10px;
+  font-weight: 700;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 items per row */
+  gap: 5.2px;
+  align-items: start;
+  justify-items: center;
+  margin-top: 10px;
+}
+
+
+.category-card {
+  background: #ffffff68;
+  border: 1px solid #0000006d;
+  border-radius: 3px;
+  padding: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.14s ease, box-shadow 0.14s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  outline: none;
+}
+
+.category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 4px 8px rgba(97, 97, 97, 0.4);
+  background-color: #fcee9ec8; /* example: dark teal blue */
+}
+
+
+.category-image-wrap {
+  width: 100%;
+  max-width: 200px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.category-image-wrap img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.category-label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #222;
+}

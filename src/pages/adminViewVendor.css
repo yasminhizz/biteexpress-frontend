@@ -1,0 +1,133 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.vendor-detail-container {
+  max-width: 980px;
+  margin: 50px auto;
+  margin-top: 30px;
+  padding: 20px 30px;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.vendor-detail-container:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.18);
+}
+
+.vendor-detail-container h2 {
+  text-align: center;
+  margin-bottom: 5px;
+  color: #000000;
+  font-size: 30px;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.08);
+  letter-spacing: 1px;
+}
+
+/*========================================
+        TWO COLUMN SECTION
+=========================================*/
+.vendor-two-column {
+  display: flex;
+  gap: 80px;
+  margin-top: 1px;
+}
+
+.vendor-col {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* ROW STYLE — label & value separated */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0px;
+}
+
+/* LEFT BOX — Label */
+.label {
+  width: 35% !important;
+  background: #6d4c41;
+  color: #fff;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 13px;
+  text-align: left;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  margin-bottom: 1px;
+}
+
+/* RIGHT BOX — Vendor data */
+.value {
+  flex: 1;
+  background: #e9d9a9;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #000;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  word-break: break-word;
+  text-transform: capitalize;
+}
+
+/* Hover animation */
+.row:hover .value {
+  background: #d8c77a;
+  transition: .2s;
+}
+
+/* Certificate link style */
+.value a {
+  font-weight: 600;
+  text-decoration: none;
+  color: #2b4fa0;
+}
+.value a:hover { color: #1a2d66; }
+
+/*========================================
+              BACK BUTTON
+=========================================*/
+.back-btn {
+  display: block;
+  width: 180px;
+  margin: 6px 0 0 0;
+  margin-top: 6px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #d6b75b, #c79f4c);
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+  transition: all 0.35s ease;
+}
+
+.back-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+  background: linear-gradient(135deg, #c79f4c, #b88632);
+}
+
+/*========================================
+              RESPONSIVE
+=========================================*/
+@media(max-width: 768px) {
+  .vendor-two-column { flex-direction: column; }
+  .vendor-col { width: 100%; }
+
+  .label { width: 40%; font-size: 13px; }
+  .value { font-size: 13px; }
+}

@@ -1,0 +1,233 @@
+/* ===============================
+   CHAT LAYOUT (GLOBAL)
+================================ */
+.chat-page {
+  padding-top: 80px;
+  max-width: 900px;
+  margin: 0 auto;
+  height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  background: #f7f7f7;
+}
+
+/* ===============================
+   CHAT LIST (INBOX)
+================================ */
+.chat-list {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.chat-list-item {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  transition: background 0.2s ease;
+}
+
+.chat-list-item:hover {
+  background: #f5f5f5;
+}
+
+.chat-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.chat-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.chat-info {
+  flex: 1;
+  overflow: hidden;
+}
+
+.chat-name {
+  font-weight: 600;
+  font-size: 15px;
+  color: #222;
+}
+
+.chat-last-message {
+  font-size: 13px;
+  color: #777;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chat-time {
+  font-size: 11px;
+  color: #999;
+  margin-left: 8px;
+}
+
+/* ===============================
+   CHAT ROOM HEADER
+================================ */
+.chat-room-header {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.chat-room-header .chat-avatar {
+  width: 40px;
+  height: 40px;
+}
+
+.chat-room-name {
+  font-weight: 600;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+/* ===============================
+   CHAT MESSAGES AREA
+================================ */
+.chat-messages {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Message bubble */
+.message {
+  max-width: 70%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+}
+
+/* Sender (You) */
+.message.sent {
+  align-self: flex-end;
+  background: #4f46e5;
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+/* Receiver */
+.message.received {
+  align-self: flex-start;
+  background: #e5e5e5;
+  color: #222;
+  border-bottom-left-radius: 4px;
+}
+
+.message-time {
+  font-size: 10px;
+  margin-top: 4px;
+  opacity: 0.7;
+  text-align: right;
+}
+
+/* ===============================
+   CHAT INPUT
+================================ */
+.chat-input-container {
+  display: flex;
+  padding: 12px;
+  background: #fff;
+  border-top: 1px solid #ddd;
+}
+
+.chat-input-container input {
+  flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 10px 14px;
+  font-size: 14px;
+  outline: none;
+}
+
+.chat-input-container input:focus {
+  border-color: #4f46e5;
+}
+
+.chat-send-btn {
+  margin-left: 10px;
+  background: #4f46e5;
+  border: none;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.chat-send-btn:hover {
+  opacity: 0.9;
+}
+
+/* ===============================
+   HEADER CHAT ICON DROPDOWN
+================================ */
+.chat-dropdown {
+  position: absolute;
+  top: 60px;
+  right: 16px;
+  width: 320px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  overflow: hidden;
+  z-index: 999;
+}
+
+.chat-dropdown-header {
+  padding: 12px 14px;
+  font-weight: 600;
+  border-bottom: 1px solid #eee;
+}
+
+.chat-dropdown-list {
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+/* ===============================
+   EMPTY STATES
+================================ */
+.chat-empty {
+  text-align: center;
+  color: #777;
+  padding: 30px;
+  font-size: 14px;
+}
+
+/* ===============================
+   MOBILE RESPONSIVE
+================================ */
+@media (max-width: 600px) {
+  .chat-page {
+    padding-top: 60px;
+  }
+
+  .chat-dropdown {
+    width: 92%;
+    right: 4%;
+  }
+
+  .message {
+    max-width: 85%;
+  }
+}

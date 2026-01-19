@@ -1,0 +1,21 @@
+[
+  {
+    "origin": [
+      "http://localhost:5174",
+      "http://localhost:5173",
+      "https://food-delivery-14ea4.web.app",
+      "https://food-delivery-14ea4.firebaseapp.com"
+    
+  
+    ],
+    "method": ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"],
+    "responseHeader": [
+      "Content-Type",
+      "Authorization",
+      "x-goog-resumable",
+      "X-Firebase-Auth",
+      "x-goog-meta-*"
+    ],
+    "maxAgeSeconds": 3600
+  }
+]

@@ -1,0 +1,187 @@
+/* customerPayment.css */
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('../assets/bgc.png'); /* adjust path */
+  background-size: cover;        /* cover full viewport */
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100vh;             /* ensure full height */
+  background-attachment: fixed;  /* optional: fixed background when scrolling */
+}
+
+.payment-page {
+  padding: 110px 20px 60px;
+  min-height: calc(100vh - 90px);
+}
+
+.payment-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.payment-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: -80px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.reminder {
+  background: #e7e4e4;
+  color: #b30000;
+  border: 1px solid #ffd0d0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* layout */
+.payment-body {
+  display: flex;
+  gap: 18px;
+}
+.pay-left {
+  flex: 1;
+  background: #fbfbff;
+  border-radius: 8px;
+  padding: 8px;
+  border: 1px solid #eef6fb;
+}
+.pay-right {
+  width: 320px;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid #eef6fb;
+}
+
+/* order list */
+.order-list {
+  max-height: 380px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-right: 6px;
+}
+.pay-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  background: #fff;
+  border-radius: 6px;
+  border: 1px solid #f1f5f7;
+}
+.pi-name {
+  font-weight: 700;
+}
+.pi-vendor {
+  color: #6b7b86;
+  font-size: 0.9rem;
+}
+
+/* total */
+.total {
+  font-weight: 900;
+  text-align: right;
+  margin-top: 10px;
+  font-size: 1.05rem;
+}
+.total span {
+  color: #006d77;
+  margin-left: 8px;
+}
+
+/* agreement */
+/* agreement */
+.agreement {
+  margin-top: 10px;
+  text-align: center; /* ✅ center the content */
+}
+
+.fpx-text {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px; /* ✅ smaller gap */
+  line-height: 1.2;   /* ✅ tighter line spacing */
+}
+
+.tick-label {
+  display: inline-flex; /* ✅ keeps label centered under the text */
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #333;
+}
+
+.tick-label input[type='checkbox'] {
+  width: 16px;
+  height: 16px;
+}
+
+.agree-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.tick-img {
+  width: 20px;
+  height: 20px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+.tick-img.on {
+  opacity: 1;
+}
+
+.pay-right {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.agree-text {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #444;
+}
+
+/* pay button */
+.pay-actions {
+  margin-top: 18px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.pay-btn {
+  background: #000405;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  width: 100px;          
+  text-align: center;
+}
+
+/* responsive */
+@media (max-width: 900px) {
+  .payment-body {
+    flex-direction: column;
+  }
+  .pay-right {
+    width: 100%;
+  }
+}

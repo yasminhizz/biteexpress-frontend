@@ -1,0 +1,91 @@
+.admin-notification-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 30px 12px;
+}
+
+.admin-notification-box {
+  width: 100%;
+  max-width: 700px;
+}
+
+/* HEADER */
+.notification-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.notification-header h2 {
+  font-size: 32px;
+  font-weight: 800;
+  margin: 0;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* LIST */
+.notification-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.notification-card {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notification-title {
+  font-weight: 700;
+  margin: 0;
+}
+
+.notification-date {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 4px 0 0;
+}
+
+/* BUTTON / STATUS */
+.view-btn {
+  background: #111827;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.status {
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.status.approved {
+  color: #16a34a;
+}
+
+.status.declined {
+  color: #dc2626;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .notification-header h2 {
+    font-size: 26px;
+  }
+}

@@ -1,0 +1,71 @@
+.admin-profile-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 30px 12px;
+}
+
+.admin-profile-box {
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+
+/* HEADER */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.profile-header h2 {
+  font-size: 32px;
+  font-weight: 800;
+  margin: 0;
+  flex: 1;
+  text-align: center;
+}
+
+
+/* CONTENT */
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.profile-avatar {
+  width: 140px;
+  height: 140px;
+  border: 1px solid #9ca3af;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-icon {
+  font-size: 64px;
+}
+
+.profile-name {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* LOGOUT */
+.logout-btn {
+  margin-top: 10px;
+  background: #000;
+  color: white;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  opacity: 0.85;
+}

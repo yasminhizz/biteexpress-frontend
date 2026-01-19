@@ -1,0 +1,237 @@
+/* ===================== */
+/* Page & Header Styling */
+/* ===================== */
+.vendor-map-page {
+  padding: 1rem;
+  font-family: "Arial", sans-serif;
+}
+
+.vendor-map-header {
+  margin-bottom: 1rem;
+  
+}
+
+.vendor-map-header h3 {
+  margin: 0;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.vendor-map-header p {
+  margin: 0.2rem 0;
+  margin-left: 59px;
+}
+
+.tracking-indicator {
+    margin-left: 59px;
+  font-weight: bold;
+  color: green;
+}
+
+/* ===================== */
+/* 2-Column Layout for Map + Info */
+/* ===================== */
+.tracking-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* map left, info right */
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.map-columns {
+  width: 100%;
+}
+
+.info-columns {
+  width: 100%;
+}
+
+/* ===================== */
+/* Map Container */
+/* ===================== */
+.vendor-map-container {
+  width: 100%;
+  height: 300px;
+  max-width: 700px;
+  margin-left: 50px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Optional Fake Map (fallback) */
+.fake-map {
+  background-color: #e5e3df;
+  background-image:
+    linear-gradient(#ccc 1px, transparent 1px),
+    linear-gradient(90deg, #ccc 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ===================== */
+/* Route Line (dummy) */
+/* ===================== */
+.route-line {
+  position: absolute;
+  top: 45%;
+  left: 20%;
+  width: 60%;
+  height: 4px;
+  background: repeating-linear-gradient(
+    90deg,
+    #4285f4,
+    #4285f4 10px,
+    transparent 10px,
+    transparent 20px
+  );
+}
+
+/* ===================== */
+/* Markers (dummy) */
+/* ===================== */
+.map-marker {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.vendor-marker {
+  background-color: #ff7043;
+  top: 40%;
+  left: 25%;
+}
+
+.customer-marker {
+  background-color: #4285f4;
+  top: 48%;
+  left: 75%;
+}
+
+/* ===================== */
+/* Tracking Info Card */
+/* ===================== */
+/* ===================== */
+/* Tracking Card - Boxed Info Style with Aligned Values */
+/* ===================== */
+.tracking-card {
+  background: #ffffff;
+  max-width: 500px;
+  margin-top: -10px;
+  padding: 1.5rem;
+  margin-right: 100px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+}
+
+/* Card title */
+.tracking-card h4 {
+  margin: 0 0 1rem 0;
+  font-size: 1.4rem;
+  color: #333;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 0.5rem;
+}
+
+/* Info box container */
+.info-box {
+  display: flex;
+  justify-content: flex-start; /* align labels to left */
+  align-items: center;
+  padding: 0.8rem 1rem;
+  background: #fafaf7;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, background 0.2s ease;
+  gap: 1rem; /* space between label and value */
+}
+
+.info-box:hover {
+  transform: translateY(-2px);
+  background: #e2e8f0;
+}
+
+/* Label */
+.info-box span {
+  font-weight: 600;
+  color: #000000;
+  width: 100px; /* FIXED width for left labels */
+  flex-shrink: 0;
+}
+
+/* Value */
+.info-box strong {
+  font-weight: 700;
+  color: #c71f1f;
+  flex-grow: 1; /* take remaining space */
+  text-align: left;
+}
+
+/* Status badge */
+.status-badge {
+  margin-top: 1rem;
+  padding: 0.6rem;
+  text-align: center;
+  border-radius: 10px;
+  background: #ffe3e3; /* soft green */
+  color: #000000;
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive tweak */
+@media (max-width: 900px) {
+  .tracking-card {
+    gap: 0.8rem;
+  }
+}
+
+
+/* ===================== */
+/* Actions Buttons */
+/* ===================== */
+.vendor-map-actions {
+  text-align: center;
+}
+
+.vendor-map-actions button {
+  padding: 0.6rem 1.4rem;
+  border-radius: 6px;
+  background-color: #000000;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.vendor-map-actions button:hover {
+  background-color: #45a049;
+}
+
+/* ===================== */
+/* Responsive Design */
+/* ===================== */
+@media (max-width: 900px) {
+  .tracking-layout {
+    grid-template-columns: 1fr; /* stack vertically on mobile */
+  }
+
+  .vendor-map-container {
+    height: 400px;
+  }
+
+  .tracking-card {
+    margin-top: 1rem;
+  }
+}

@@ -1,0 +1,176 @@
+/* customerViewOngoingOrder.css */
+.view-page {
+  padding: 90px 20px 60px;
+  min-height: calc(100vh - 90px);
+  background-image: url('../assets/bgc.png') !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.view-page { 
+  padding: 90px 20px 60px;  
+  min-height: calc(100vh - 90px);
+  margin-top: -30px !important; 
+}
+
+.view-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+  background-color: rgba(255, 255, 255, 0.495); /* slightly transparent */
+}
+
+/* Tabs */
+.tabs { 
+  display:flex; 
+  gap:6px; 
+  margin-bottom:12px; 
+}
+
+.tab { 
+  padding:8px 12px; 
+  border-radius:8px; 
+  background:#f1f3f5; 
+  border:1px solid #e2e8ea; 
+  cursor:pointer; 
+  font-weight:700; 
+  text-transform: uppercase;
+}
+
+.tab.active { 
+  background:#fff; 
+}
+
+/* Order box */
+.order-box h2 {
+  margin-bottom: 18px;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #065061;
+}
+
+/* Order info */
+.order-info h3 {
+  font-size:1.2rem;
+  font-weight:800;
+  margin-bottom:1px;
+  margin-left: 69px;
+}
+
+.order-info-table {
+  width:84%;
+  margin: 0 auto;
+  border-collapse:collapse;
+  background:#a4c9cc94;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 4px 15px rgba(0,0,0,0.05);
+  color: #065061;
+}
+
+.order-info-table td {
+  padding:12px 10px;
+  border-bottom:1px solid #00000057;
+  font-size:.95rem;
+}
+
+.order-info-table td:first-child {
+  font-weight:800;
+  width:140px;
+}
+
+/* --------------------------------------------
+   MENU TABLE
+---------------------------------------------*/
+.items h3 {
+  font-size:1.2rem;
+  font-weight:800;
+  margin:25px 0 10px;
+  margin-left: 85px;
+}
+
+.item-table {
+  width: 80%; /* adjust size (70%-90%) */
+  margin: 0 auto; /* keep center */
+  border-collapse: collapse;
+  background:#fff;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 4px 15px rgba(0,0,0,0.05);
+}
+.item-table th {
+  background:#065061;
+  color:#fff;
+  padding:12px 14px;
+  text-transform:uppercase;
+  font-size:.85rem;
+  font-weight:900;
+}
+
+.item-table td {
+  padding:12px 14px;
+  border-bottom:1px solid #00000065;
+  font-size:.95rem;
+  font-weight:600;
+}
+
+.item-table tbody tr:hover {
+  background:#f9fcff;
+  transition:.25s;
+}
+
+.item-table td:nth-child(2),
+.item-table td:nth-child(3),
+.item-table td:nth-child(4) {
+  text-align:center;
+}
+
+
+.total-box {
+  width: 80%;
+  margin: 12px auto 0;
+  padding: 12px 18px;
+  background:#ffffff;
+  border-radius:10px;
+  font-size:1.1rem;
+  font-weight:700;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 4px 15px rgba(0,0,0,0.05);
+}
+
+.total-box strong {
+  font-size:1.2rem;
+  color:#000;
+}
+
+/* --------------------------------------------
+   BUTTON
+---------------------------------------------*/
+.order-actions {
+  margin-top:25px;
+  display:flex;
+  justify-content:flex-end;
+}
+
+.track-btn {
+  background:linear-gradient(135deg,#000,#3b3b3b);
+  color:#fff;
+  border:none;
+  padding:12px 20px;
+  border-radius:10px;
+  font-weight:800;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.track-btn:hover {
+  transform:translateY(-3px);
+  box-shadow:0 6px 18px rgba(0,0,0,0.2);
+}

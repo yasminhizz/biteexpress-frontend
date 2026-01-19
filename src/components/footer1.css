@@ -1,0 +1,104 @@
+.footer {
+  background-color: #222;
+  color: #ddd;
+  padding: 50px 0 20px 0;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Container for top footer sections */
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  text-align: left;
+  padding: 0 40px;
+}
+
+/* Each column */
+.footer-section {
+  flex: 1;
+  min-width: 220px;
+  margin: 20px;
+}
+
+.footer-section h3 {
+  color: #f8d34a;
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+}
+
+.footer-section h4 {
+  color: #fff;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.footer-section p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section ul li {
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.footer-section ul li:hover {
+  color: #f8d34a;
+}
+
+/* Divider between top and bottom footer */
+.footer-divider {
+  height: 1px;
+  background-color: #444;
+  margin: 30px 0;
+}
+
+/* Bottom Footer Section */
+.footer-bottom {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.social-icons a {
+  color: #ddd;
+  transition: color 0.2s;
+}
+
+.social-icons a:hover {
+  color: #f8d34a;
+}
+
+.footer-bottom p {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-section {
+    margin: 15px 0;
+  }
+}

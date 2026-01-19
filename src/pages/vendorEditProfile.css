@@ -1,0 +1,67 @@
+.edit-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+  background: url("../assets/bga.png") no-repeat center center/cover;
+  min-height: 100vh;
+}
+
+.edit-box {
+  background: #fff;
+  padding: 30px;
+  width: 850px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.edit-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-grid {
+  display: flex;
+  gap: 30px;
+}
+
+.left-col, .right-col {
+  flex: 1;
+}
+
+.input-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.section-title {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.save-button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background: #444;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.save-button:hover {
+  background: #222;
+}

@@ -1,0 +1,39 @@
+.header {
+  display: flex;
+  justify-content: space-between; /* space between logo and login icon */
+  align-items: center;
+  padding: 10px 80px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #59b8e0;
+}
+
+/* Left side - Logo */
+.header-left .logo {
+  height: 60px;
+  width: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.header-left .logo:hover {
+  transform: scale(1.1);
+}
+
+/* Right side - Login icon */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-right .login {
+  height: 32px;  /* consistent size with menu/cart icons */
+  width: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.header-right .login:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2); /* subtle visual enhancement */
+}

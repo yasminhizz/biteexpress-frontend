@@ -1,0 +1,50 @@
+.trackxx-page {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Side-by-side layout */
+.trackxx-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* map wider than details */
+  gap: 24px;
+  align-items: start;
+}
+
+/* Map container */
+.mapxx-box {
+  width: 100%;
+  height: 500px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Details card */
+.trackxx-info {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  display: grid;
+  gap: 14px;
+  font-size: 15px;
+}
+
+/* Highlight live status */
+.trackxx-info .status {
+  font-weight: 700;
+  color: #ff7a00;
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 900px) {
+  .trackxx-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .mapxx-box {
+    height: 420px;
+  }
+}

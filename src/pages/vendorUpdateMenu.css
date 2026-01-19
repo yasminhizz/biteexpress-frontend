@@ -1,0 +1,137 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Fredoka', system-ui;
+  background: url("../assets/bgc.png") no-repeat center/cover !important;
+}
+
+.update-menu {
+  max-width: 720px;
+  margin: 10px auto;
+  padding: 20px;
+}
+
+.update-menu h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.update-form {
+  background: rgba(255,255,255,0.95);
+  padding: 14px;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+
+/* GRID */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* COLUMNS */
+.form-left,
+.form-right {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: -3px;
+}
+
+/* INPUTS SAME WIDTH */
+input,
+textarea,
+select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #e53935;
+  font-size: 0.85rem;
+}
+
+/* TEXTAREA FIX */
+textarea {
+  width: 100% !important;
+  height: 70px;
+  resize: none;
+  line-height: 1.4;
+  border: 1px solid #e53935 !important;
+}
+
+/* IMAGE PREVIEW */
+.image-preview {
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+  border: none !important; 
+}
+
+.image-preview img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* PROGRESS */
+.upload-progress {
+  position: relative;
+  height: 18px;
+  background: #eee;
+  border-radius: 9px;
+  margin-top: 10px;
+}
+
+.upload-progress .bar {
+  background: #4caf50;
+  height: 100%;
+}
+
+.upload-progress .pct {
+  position: absolute;
+  right: 8px;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* BUTTON */
+.update-form button {
+  margin: 14px auto 0;
+  width: 200px;
+  padding: 10px;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.update-form button:hover {
+  background: #0c6c8f;
+}
+
+/* MOBILE */
+@media (max-width: 640px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .update-form button {
+    width: 100%;
+  }
+}

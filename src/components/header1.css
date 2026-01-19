@@ -1,0 +1,80 @@
+/* logo - cart, profile */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 80px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #59b8e0;
+}
+
+/* Left side - Menu + Logo */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 50px; /* space between menu and logo */
+}
+
+.header-left .menu {
+  height: 38px;        /* same height as cart icon */
+  width: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.header-left .menu:hover {
+  transform: scale(1.1);
+}
+
+.header-left .logo {
+  height: 60px;
+  width: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.header-left .logo:hover {
+  transform: scale(1.1);
+}
+
+/* Right side - Icons */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.header-right .cart {
+  height: 38px;   /* same as menu */
+  width: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.header-right .cart:hover {
+  transform: scale(1.1);
+}
+
+.header-right .logout {
+  height: 31px;   /* same as menu */
+  width: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.header-right .logout:hover {
+  transform: scale(1.1);
+}
+
+
+.header-right .profile {
+  height: 47px;  /* for profile and logout */
+  width: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.header-right .profile:hover {
+  transform: scale(1.1);
+}

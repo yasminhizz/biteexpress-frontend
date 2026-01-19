@@ -1,0 +1,113 @@
+/* logo - order, profile, logout */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 80px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #59b8e0;
+}
+
+/* Ensure header stays above page content and overlay but below the sidebar */
+.header {
+  position: relative;
+  z-index: 1200;
+}
+
+/* Left side - Menu + Logo */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 50px; /* space between menu and logo */
+}
+
+.header-left .menu {
+  height: 38px;        /* same height as cart icon */
+  width: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.header-left .menu:hover {
+  transform: scale(1.1);
+}
+
+.header-left .logo {
+  height: 60px;
+  width: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.header-left .logo:hover {
+  transform: scale(1.1);
+}
+
+/* Right side - Icons */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* Message icon container */
+.header-right .message {
+  width: 44px;
+  height: 36px;
+  padding: 0;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Message icon image */
+.header-right .message img {
+  width: 20px;        /* 👈 visually matches other icons */
+  height: 20px;
+  object-fit: contain;
+  display: block;  
+  transform: translateY(1px);
+}
+
+.header-right .message:hover {
+  transform: scale(1.1);
+}
+
+
+.header-right .order {
+  height: 32px;   /* same as menu */
+  width: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.header-right .order:hover {
+  transform: scale(1.1);
+}
+
+.header-right .logout {
+  height: 31px;   /* same as menu */
+  width: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.header-right .profile {
+  height: 47px;  /* for profile and logout */
+  width: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.header-right .profile:hover {
+  transform: scale(1.1);
+}
+
+.header-right .logout:hover {
+  transform: scale(1.1);
+}

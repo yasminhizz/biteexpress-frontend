@@ -1,0 +1,128 @@
+/* Full page background */
+.page-background {
+  min-height: 85.6vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 40px;
+  background: url("../assets/bga.png") no-repeat center center/cover;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+/* Form container */
+.signup-customer-container {
+  display: flex;
+  justify-content: center;
+  width: 730px; /* wider to fit 2 columns */
+}
+
+/* Form */
+.signup-customer-form {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  width: 100%;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.signup-customer-form:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
+
+/* Form title */
+.form-title {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2b0c3e;
+  letter-spacing: 0.5px;
+}
+
+/* Two-column grid with relative positioning */
+.form-grid-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px; /* spacing between columns */
+  position: relative;
+  width: 100%;
+}
+
+/* Left and right columns take equal width */
+.left-column,
+.right-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Vertical divider */
+.vertical-divider {
+  width: 1px;
+  background: rgba(0,0,0,0.15);
+  align-self: stretch;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* Input groups */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-top: -8px;
+}
+
+.input-group label {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 0px;
+  color: #4a4a4a;
+}
+
+.input-group input {
+  padding: 5px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  transition: all 0.2s;
+  outline: none;
+  margin-bottom: 1px;
+}
+
+.input-group input:focus {
+  border-color: #0c6c8f;
+  box-shadow: 0 0 5px rgba(12,108,143,0.3);
+}
+
+/* Button wrapper */
+.button-wrapper {
+  display: flex;
+  justify-content: flex-end; /* aligns button to the right */
+  margin-top: 1px;
+}
+
+/* Submit button */
+.signup-customer-form button {
+  padding: 9px;
+  width: 100px;
+  background: black;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all 0.3s;
+}
+
+.signup-customer-form button:hover {
+  background: #0c6c8f;
+}
