@@ -9,7 +9,7 @@ import ChatRoom from "./pages/chatRoom";
 import RegisterRole from "./pages/registerRole";
 import SignupCustomer from "./pages/signupCustomer";
 import SignupVendor from "./pages/signupVendor";
-import ConfirmLocation from "./pages/vendorConfirmLocation";
+import VendorConfirmLocation from "./pages/vendorConfirmLocation";
 import ProfileVendor from "./pages/profileVendor";
 import VendorDashboard from "./pages/vendorDashboard";
 import VendorAddMenu from "./pages/vendorAddMenu";
@@ -74,7 +74,7 @@ function App() {
         <Route path="/register-vendor" element={<SignupVendor />} />
         <Route path="/profile" element={<ProfileVendor />} />
         <Route path="/vendor/edit-profile" element={<VendorEditProfile />} />
-        <Route path="/vendor/confirm-location" element={<ConfirmLocation />} />
+        <Route path="/vendor/confirm-location" element={<VendorConfirmLocation />} />
         <Route path="/vendor" element={<VendorDashboard />} />
         <Route path="/vendor/add" element={<VendorAddMenu />} />
         <Route path="/vendor/view/:id" element={<VendorViewMenu />} />
