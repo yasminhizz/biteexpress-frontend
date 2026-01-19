@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // Import components with Capital letters
 import Login from "./pages/login";
-import ForgotPassword from "./pages/ForgotPassword";
+import ForgotPassword from "./pages/forgotPassword";
 import ChatList from "./pages/chatList";
 import ChatRoom from "./pages/chatRoom";
 
