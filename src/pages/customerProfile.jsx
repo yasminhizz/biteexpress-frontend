@@ -1,15 +1,16 @@
 // src/pages/CustomerProfile.jsx
-// src/pages/CustomerProfile.jsx
 import React, { useEffect, useState } from 'react';
 import { auth, db } from '../firebase';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import Header from '../components/header1';
 import './customerProfile.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function CustomerProfile() {
   const [customer, setCustomer] = useState(null);
   const [editMode, setEditMode] = useState(false);
   const [formData, setFormData] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     const user = auth.currentUser;
@@ -25,7 +26,7 @@ export default function CustomerProfile() {
             fullName: data.fullName || '',
             username: data.username || '',
             email: data.email || '',
-            id: data.id || '',          // ✅ ADD ID
+            id: data.id || '',
             phone: data.phone || '',
             address: data.address || '',
           });
@@ -75,6 +76,21 @@ export default function CustomerProfile() {
                 <>
                   <h2 className="cust-profile-title">{customer.fullName}</h2>
                   <p className="cust-profile-subtitle">@{customer.username}</p>
+
+                  {/* ✅ Register as vendor link */}
+                  <p
+                    style={{
+                      marginTop: 6,
+                      fontSize: 13,
+                      color: '#007bff',
+                      cursor: 'pointer',
+                      textDecoration: 'underline',
+                      width: 'fit-content',
+                    }}
+                    onClick={() => navigate('/register-vendor')}
+                  >
+                    Register as vendor?
+                  </p>
                 </>
               ) : (
                 <>
@@ -101,7 +117,7 @@ export default function CustomerProfile() {
           <div className="cust-detail-table">
             {[
               { label: 'Email', key: 'email' },
-              { label: 'ID', key: 'id' },          // ✅ ID added here
+              { label: 'ID', key: 'id' },
               { label: 'Phone', key: 'phone' },
               { label: 'Address', key: 'address' },
             ].map((item) => (
@@ -151,7 +167,7 @@ export default function CustomerProfile() {
                       fullName: customer.fullName,
                       username: customer.username,
                       email: customer.email,
-                      id: customer.id,        // ✅ reset ID
+                      id: customer.id,
                       phone: customer.phone,
                       address: customer.address,
                     });

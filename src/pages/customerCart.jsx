@@ -1,8 +1,19 @@
-// src/pages/customerCart.jsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/header1';
 import './customerCart.css';
+
+const getCartKey = () => {
+  const customerId = localStorage.getItem("currentCustomerId");
+  if (customerId) return `cart_${customerId}`;
+
+  let guestId = localStorage.getItem("guestId");
+  if (!guestId) {
+    guestId = `guest_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
+    localStorage.setItem("guestId", guestId);
+  }
+  return `cart_${guestId}`;
+};
 
 export default function CustomerCart() {
   const navigate = useNavigate();
@@ -10,60 +21,42 @@ export default function CustomerCart() {
   const [selectAllVendors, setSelectAllVendors] = useState({});
   const [loading, setLoading] = useState(true);
 
-  // ✅ Generate unique cart key per customer/guest
-  const [CART_KEY, setCartKey] = useState("cart_guest");
+  // ✅ stable key (recomputed on refresh)
+  const CART_KEY = useMemo(() => getCartKey(), []);
 
   useEffect(() => {
-    // Try to get logged-in customer ID from localStorage or auth
-    let customerId = localStorage.getItem("currentCustomerId");
-    if (!customerId) {
-      // If no customer, generate a guest ID
-      customerId = localStorage.getItem("guestId");
-      if (!customerId) {
-        customerId = `guest_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
-        localStorage.setItem("guestId", customerId);
-      }
-    }
-
-    const key = `cart_${customerId}`;
-    setCartKey(key);
-
-    // Load cart for this user
-    const saved = localStorage.getItem(key);
-    if (saved) {
-      try {
+    try {
+      const saved = localStorage.getItem(CART_KEY);
+      if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed)) setCart(parsed);
-      } catch (err) {
-        console.error('Error parsing cart:', err);
       }
+    } catch (err) {
+      console.error("Error loading cart:", err);
+    } finally {
+      setLoading(false);
     }
+  }, [CART_KEY]);
 
-    setLoading(false);
-  }, []);
-
-  // ✅ Persist cart changes to localStorage
   useEffect(() => {
-    if (!loading) {
-      localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    if (loading) return;
 
-      const vendors = {};
-      cart.forEach((item) => {
-        if (!vendors[item.vendorId]) vendors[item.vendorId] = true;
-        if (!item.selected) vendors[item.vendorId] = false;
-      });
-      setSelectAllVendors(vendors);
-    }
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+
+    const vendors = {};
+    cart.forEach((item) => {
+      if (!vendors[item.vendorId]) vendors[item.vendorId] = true;
+      if (!item.selected) vendors[item.vendorId] = false;
+    });
+    setSelectAllVendors(vendors);
   }, [cart, loading, CART_KEY]);
 
-  // ✅ Toggle individual item
   const toggleItem = (id) => {
     setCart((prev) =>
       prev.map((it) => (it.id === id ? { ...it, selected: !it.selected } : it))
     );
   };
 
-  // ✅ Toggle all items under a vendor
   const toggleVendor = (vendorId) => {
     const currentlySelected = selectAllVendors[vendorId] === true;
     setCart((prev) =>
@@ -73,21 +66,15 @@ export default function CustomerCart() {
     );
   };
 
-  // ✅ Adjust quantity
   const changeQty = (id, qty) => {
     const q = Math.max(1, Number(qty) || 1);
-    setCart((prev) =>
-      prev.map((it) => (it.id === id ? { ...it, qty: q } : it))
-    );
+    setCart((prev) => prev.map((it) => (it.id === id ? { ...it, qty: q } : it)));
   };
 
-  // ✅ Delete item
   const deleteItem = (id) => {
-    const updated = cart.filter((it) => it.id !== id);
-    setCart(updated);
+    setCart((prev) => prev.filter((it) => it.id !== id));
   };
 
-  // ✅ Proceed to checkout
   const placeOrder = () => {
     const items = cart.filter((it) => it.selected);
     if (items.length === 0) {
@@ -97,21 +84,20 @@ export default function CustomerCart() {
     navigate('/customer/checkout', { state: { items } });
   };
 
-  // ✅ Group items by vendor
   const grouped = cart.reduce((acc, it) => {
     if (!acc[it.vendorId]) acc[it.vendorId] = { vendorName: it.vendorName, items: [] };
     acc[it.vendorId].items.push(it);
     return acc;
   }, {});
 
-  // 🕒 Loading state
-  if (loading)
+  if (loading) {
     return (
       <>
         <Header />
         <div style={{ padding: 20 }}>Loading your cart...</div>
       </>
     );
+  }
 
   return (
     <>
@@ -126,15 +112,8 @@ export default function CustomerCart() {
             ) : (
               Object.entries(grouped).map(([vendorId, group]) => (
                 <div className="vendor-block" key={vendorId}>
-                  <div
-                    className="vendor_header"
-                    onClick={() => toggleVendor(vendorId)}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={!!selectAllVendors[vendorId]}
-                      readOnly
-                    />
+                  <div className="vendor_header" onClick={() => toggleVendor(vendorId)}>
+                    <input type="checkbox" checked={!!selectAllVendors[vendorId]} readOnly />
                     <span className="vendor-names">{group.vendorName}</span>
                   </div>
 
@@ -148,33 +127,17 @@ export default function CustomerCart() {
                         />
                         <div className="item-info">
                           <div className="item-name">{item.name}</div>
-                          <div className="item-price">
-                            RM {Number(item.price).toFixed(2)}
-                          </div>
+                          <div className="item-price">RM {Number(item.price || 0).toFixed(2)}</div>
                         </div>
                       </div>
 
                       <div className="item-right">
                         <div className="qty-control">
-                          <button
-                            onClick={() => changeQty(item.id, item.qty - 1)}
-                          >
-                            −
-                          </button>
-                          <input
-                            value={item.qty}
-                            onChange={(e) => changeQty(item.id, e.target.value)}
-                          />
-                          <button
-                            onClick={() => changeQty(item.id, item.qty + 1)}
-                          >
-                            +
-                          </button>
+                          <button onClick={() => changeQty(item.id, item.qty - 1)}>−</button>
+                          <input value={item.qty} onChange={(e) => changeQty(item.id, e.target.value)} />
+                          <button onClick={() => changeQty(item.id, item.qty + 1)}>+</button>
                         </div>
-                        <button
-                          className="delete_btn"
-                          onClick={() => deleteItem(item.id)}
-                        >
+                        <button className="delete_btn" onClick={() => deleteItem(item.id)}>
                           Delete
                         </button>
                       </div>

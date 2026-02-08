@@ -60,7 +60,6 @@ export default function CustomerViewVendorPage() {
   const navigate = useNavigate();
   const storage = getStorage();
 
-  /* Placeholder avatar generator */
   const placeholderVendorImage = (name) =>
     `https://ui-avatars.com/api/?name=${encodeURIComponent(name || 'Vendor')}&background=ececec&color=555`;
 
@@ -77,18 +76,16 @@ export default function CustomerViewVendorPage() {
       try {
         // 1. Fetch vendor data
         const vSnap = await getDoc(doc(db, 'vendors', vendorId));
-        
         if (vSnap.exists()) {
           const data = { id: vSnap.id, ...vSnap.data() };
           let finalURL = '';
 
-          // Logic to determine the image URL
           if (data.profileImageURL && data.profileImageURL.startsWith('http')) {
             finalURL = data.profileImageURL;
           } else if (data.profileImagePath) {
             try {
-              const cleanPath = data.profileImagePath.startsWith('/') 
-                ? data.profileImagePath.substring(1) 
+              const cleanPath = data.profileImagePath.startsWith('/')
+                ? data.profileImagePath.substring(1)
                 : data.profileImagePath;
               finalURL = await getDownloadURL(ref(storage, cleanPath));
             } catch (err) {
@@ -96,17 +93,17 @@ export default function CustomerViewVendorPage() {
             }
           }
 
-          // ✅ Map phone to whatsappPhone
           setVendor({
             ...data,
             profileImageURL: finalURL || placeholderVendorImage(data.businessName),
-            whatsappPhone: data.phone || '', // <-- Use Firestore 'phone' field
+            whatsappPhone: data.phone || '',
           });
         }
 
         // 2. Fetch menus
         const q = query(collection(db, 'menus'), where('vendorId', '==', vendorId));
         const snap = await getDocs(q);
+
         const fetched = snap.docs.map(d => {
           const item = d.data();
           return {
@@ -127,7 +124,6 @@ export default function CustomerViewVendorPage() {
     fetchData();
   }, [vendorId, storage]);
 
-  /* Filter logic */
   const availableCategories = useMemo(() => {
     const found = new Set(menus.map(m => m._category));
     return CATEGORY_ORDER.filter(c => found.has(c));
@@ -142,28 +138,44 @@ export default function CustomerViewVendorPage() {
 
   const openMenu = id => navigate(`/customer/menu/${id}`);
 
+  // ✅ Add to cart (SAME STYLE AS CustomerViewMenuDetails)
   const addToCart = (menu) => {
-    const cart = JSON.parse(localStorage.getItem("cart_demo")) || [];
+    // Get customer ID (logged-in or guest)
+    let customerId = localStorage.getItem("currentCustomerId");
+    if (!customerId) {
+      customerId = localStorage.getItem("guestId");
+      if (!customerId) {
+        customerId = `guest_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
+        localStorage.setItem("guestId", customerId);
+      }
+    }
 
-    const existing = cart.find(item => item.id === menu.id);
+    const CART_KEY = `cart_${customerId}`;
 
+    // Load cart
+    const cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
+
+    // If already exists -> increase qty
+    const existing = cart.find((i) => i.id === menu.id);
     if (existing) {
       existing.qty += 1;
     } else {
       cart.push({
         id: menu.id,
-        name: menu.name,
-        price: menu.price,
-        imageURL: menu.imageURL,
         vendorId: vendorId,
-        vendorName: vendor?.businessName || 'Vendor',
+        vendorName: vendor?.businessName || "Vendor",
+        name: menu.name,
+        price: Number(menu.price),
         qty: 1,
-        selected: true
+        selected: true,
+        imageURL: menu.imageURL || "",
       });
     }
 
-    localStorage.setItem("cart_demo", JSON.stringify(cart));
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+
     alert("Added to cart");
+    // optional: navigate('/customer/cart');
   };
 
   if (loading) {
@@ -259,7 +271,7 @@ export default function CustomerViewVendorPage() {
                   <button className="menu-name" onClick={() => openMenu(menu.id)}>
                     {menu.name}
                   </button>
-                  <span className="prices">RM {menu.price}</span>
+                  <span className="prices">RM {Number(menu.price || 0).toFixed(2)}</span>
                 </div>
               </div>
             ))}

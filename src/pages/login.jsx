@@ -27,6 +27,10 @@ export default function Login() {
       const user = userCredential.user;
       let roleFound = false;
 
+      // OPTIONAL: clear guest cart identity once logged in
+      // (prevents your system from still using guestId)
+      localStorage.removeItem("guestId");
+
       // ===== ADMIN =====
       const adminQuery = query(
         collection(db, "admin"),
@@ -34,6 +38,11 @@ export default function Login() {
       );
       const adminSnapshot = await getDocs(adminQuery);
       if (!adminSnapshot.empty) {
+        const adminDoc = adminSnapshot.docs[0];
+        localStorage.setItem("currentRole", "admin");
+        localStorage.setItem("currentCustomerId", adminDoc.id); // store id
+        // or: localStorage.setItem("currentCustomerId", user.uid);
+
         navigate("/admin");
         roleFound = true;
       }
@@ -45,7 +54,17 @@ export default function Login() {
           where("email", "==", user.email)
         );
         const customerSnapshot = await getDocs(customerQuery);
+
         if (!customerSnapshot.empty) {
+          const customerDoc = customerSnapshot.docs[0];
+
+          localStorage.setItem("currentRole", "customer");
+          // ✅ store Firestore customer doc id (stable)
+          localStorage.setItem("currentCustomerId", customerDoc.id);
+
+          // optional: also keep email
+          localStorage.setItem("currentEmail", user.email);
+
           navigate("/customer/nearby-vendors");
           roleFound = true;
         }
@@ -58,7 +77,13 @@ export default function Login() {
           where("email", "==", user.email)
         );
         const vendorSnapshot = await getDocs(vendorQuery);
+
         if (!vendorSnapshot.empty) {
+          const vendorDoc = vendorSnapshot.docs[0];
+
+          localStorage.setItem("currentRole", "vendor");
+          localStorage.setItem("currentCustomerId", vendorDoc.id);
+
           navigate("/vendor");
           roleFound = true;
         }
@@ -104,7 +129,6 @@ export default function Login() {
               <button type="submit">LOGIN</button>
             </form>
 
-            {/* 🔹 FORGOT PASSWORD */}
             <p
               className="forgot-password"
               onClick={() => navigate("/forgot-password")}

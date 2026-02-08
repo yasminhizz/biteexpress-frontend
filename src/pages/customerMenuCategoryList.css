@@ -86,6 +86,8 @@
   cursor: pointer;
   overflow: hidden;
   border-bottom: 1px solid #eee;
+  position: relative;
+  z-index: 1;
 }
 .menu-thumb img {
   width: 100%;
@@ -100,7 +102,6 @@
 /* Image wrapper for overlay */
 .menu-thumb-wrapper {
   position: relative;
-  width: 100%;
 }
 
 .no-img {

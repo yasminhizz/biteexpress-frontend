@@ -101,7 +101,7 @@ export default function CustomerTopSales() {
             <div
               key={menu.id}
               className="menu-card"
-              onClick={() => navigate(`/customer/vendor/${menu.vendorId}`)}
+              onClick={() => navigate(`/customer/menu/${menu.id}`)}
             >
               {/* MENU IMAGE */}
               <div className="menu-images">
