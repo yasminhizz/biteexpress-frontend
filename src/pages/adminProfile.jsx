@@ -5,7 +5,7 @@ import "./adminProfile.css";
 export default function AdminProfile() {
   // 🔹 Dummy admin data
   const admin = {
-    name: "FARID",
+    name: "ADMIN",
   };
 
   return (

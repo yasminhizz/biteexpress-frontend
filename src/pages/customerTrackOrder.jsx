@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import Header from "../components/header1";
 import { db } from "../firebase";
@@ -12,16 +12,21 @@ export default function CustomerTrackOrder() {
 
   const [order, setOrder] = useState(state?.order || null);
   const [loading, setLoading] = useState(!state?.order);
+
   const [vendorLocation, setVendorLocation] = useState(null);
   const [customerLocation, setCustomerLocation] = useState(null);
-  const [distance, setDistance] = useState(null); // in km
-  const [eta, setEta] = useState(null); // in minutes
+
+  const [distanceText, setDistanceText] = useState("");
+  const [etaText, setEtaText] = useState("");
 
   const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+
   const mapRef = useRef(null);
+  const directionsRendererRef = useRef(null);
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: apiKey,
+    libraries: ["places"], // not required, but safe
   });
 
   /* ================= Fetch Order (if page refreshed) ================= */
@@ -47,46 +52,81 @@ export default function CustomerTrackOrder() {
   useEffect(() => {
     if (!order) return;
 
-    // normalize Firestore GeoPoints to {lat,lng}
+    // normalize Firestore GeoPoints / plain objects to {lat,lng}
     if (order.vendorLocation) {
       setVendorLocation({
-        lat: order.vendorLocation.lat || order.vendorLocation._lat,
-        lng: order.vendorLocation.lng || order.vendorLocation._long || order.vendorLocation._lng,
+        lat: order.vendorLocation.lat ?? order.vendorLocation._lat,
+        lng:
+          order.vendorLocation.lng ??
+          order.vendorLocation._long ??
+          order.vendorLocation._lng,
       });
     }
 
     if (order.customerLocation) {
       setCustomerLocation({
-        lat: order.customerLocation.lat || order.customerLocation._lat,
-        lng: order.customerLocation.lng || order.customerLocation._long || order.customerLocation._lng,
+        lat: order.customerLocation.lat ?? order.customerLocation._lat,
+        lng:
+          order.customerLocation.lng ??
+          order.customerLocation._long ??
+          order.customerLocation._lng,
       });
     }
   }, [order]);
 
-  /* ================= Calculate Distance & ETA ================= */
-  useEffect(() => {
-    if (!vendorLocation || !customerLocation) return;
+  /* ================= Draw route (blue line) ================= */
+  const drawRoute = useCallback(() => {
+    if (!window.google || !vendorLocation || !customerLocation) return;
 
-    const toRad = (deg) => (deg * Math.PI) / 180;
-    const R = 6371; // Earth radius in km
+    // init renderer once
+    if (!directionsRendererRef.current) {
+      directionsRendererRef.current = new window.google.maps.DirectionsRenderer({
+        suppressMarkers: true,
+        polylineOptions: {
+          strokeColor: "#4285F4",
+          strokeWeight: 6,
+        },
+      });
+    }
 
-    const dLat = toRad(customerLocation.lat - vendorLocation.lat);
-    const dLng = toRad(customerLocation.lng - vendorLocation.lng);
-    const lat1 = toRad(vendorLocation.lat);
-    const lat2 = toRad(customerLocation.lat);
+    const map = mapRef.current;
+    if (!map) return;
 
-    const a =
-      Math.sin(dLat / 2) ** 2 +
-      Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
-    const d = R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    directionsRendererRef.current.setMap(map);
 
-    setDistance(d);
+    const service = new window.google.maps.DirectionsService();
+    service.route(
+      {
+        origin: vendorLocation,
+        destination: customerLocation,
+        travelMode: window.google.maps.TravelMode.DRIVING,
+      },
+      (result, status) => {
+        if (status === "OK" && result?.routes?.[0]?.legs?.[0]) {
+          directionsRendererRef.current.setDirections(result);
+          const leg = result.routes[0].legs[0];
+          setDistanceText(leg.distance?.text || "");
+          setEtaText(leg.duration?.text || "");
 
-    // Assume average speed 40 km/h
-    const avgSpeed = 40; // km/h
-    const etaMinutes = (d / avgSpeed) * 60;
-    setEta(etaMinutes);
+          // optional: auto-fit route on screen
+          if (result.routes[0].bounds) {
+            map.fitBounds(result.routes[0].bounds);
+          }
+        } else {
+          console.warn("Directions failed:", status);
+          setDistanceText("");
+          setEtaText("");
+        }
+      }
+    );
   }, [vendorLocation, customerLocation]);
+
+  useEffect(() => {
+    if (!isLoaded) return;
+    if (!vendorLocation || !customerLocation) return;
+    if (!mapRef.current) return;
+    drawRoute();
+  }, [isLoaded, vendorLocation, customerLocation, drawRoute]);
 
   /* ================= Guards ================= */
   if (loading)
@@ -109,9 +149,7 @@ export default function CustomerTrackOrder() {
     return (
       <>
         <Header />
-        <div style={{ padding: 20 }}>
-          Waiting for delivery location data...
-        </div>
+        <div style={{ padding: 20 }}>Waiting for delivery location data...</div>
       </>
     );
 
@@ -134,19 +172,25 @@ export default function CustomerTrackOrder() {
           mapContainerStyle={{ width: "100%", height: "500px" }}
           zoom={14}
           center={vendorLocation}
-          onLoad={(map) => (mapRef.current = map)}
+          onLoad={(map) => {
+            mapRef.current = map;
+          }}
         >
           <Marker position={vendorLocation} label="V" />
           <Marker position={customerLocation} label="C" />
+          {/* Blue route is handled by DirectionsRenderer (not a React component) */}
         </GoogleMap>
 
         <div className="track-info">
           <div>Status: {order.status}</div>
-          {distance !== null && eta !== null && (
+
+          {distanceText || etaText ? (
             <>
-              <div>Distance: {distance.toFixed(2)} km</div>
-              <div>ETA: {Math.ceil(eta)} minutes</div>
+              <div>Distance: {distanceText || "Calculating..."}</div>
+              <div>ETA: {etaText || "Calculating..."}</div>
             </>
+          ) : (
+            <div>Route: Calculating...</div>
           )}
         </div>
       </div>
