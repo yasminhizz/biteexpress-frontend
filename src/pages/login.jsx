@@ -65,7 +65,7 @@ export default function Login() {
           // optional: also keep email
           localStorage.setItem("currentEmail", user.email);
 
-          navigate("/customer/nearby-vendors");
+          navigate("/customer/topsales");
           roleFound = true;
         }
       }
